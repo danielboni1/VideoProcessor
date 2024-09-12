@@ -1,6 +1,7 @@
-#include <opencv2/opencv.hpp>
+ #include <opencv2/opencv.hpp>
 #include <gst/gst.h>
 #include <iostream>
+using namespace cv;
 
 void convertFormat(const std::string& inputFile, const std::string& outputFile) {
     cv::VideoCapture cap(inputFile);
@@ -91,6 +92,6 @@ int main(int argc, char** argv) {
     rotateVideo(inputFile, "rotated.avi", 90);
     addTextOverlay(inputFile, "text_overlay.avi", "Sample Text");
     applyGrayscaleFilter(inputFile, "grayscale.avi");
-
+    
     return 0;
 }

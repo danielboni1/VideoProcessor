@@ -1,19 +1,4 @@
 ﻿
-# CMakeList.txt : Top-level CMake project file, do global configuration
-# and include sub-projects here.
-#
-#cmake_minimum_required (VERSION 3.8)
-
-# Enable Hot Reload for MSVC compilers if supported.
-#if (POLICY CMP0141)
- # cmake_policy(SET CMP0141 NEW)
- # set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
-#endif()
-
-#project ("VideoProcessor")
-
-# Include sub-projects.
-#add_subdirectory ("VideoProcessor")
 cmake_minimum_required(VERSION 3.8)
 project(VideoProcessor)
 
@@ -21,7 +6,8 @@ project(VideoProcessor)
 set(CMAKE_CXX_STANDARD 17)
 
 # Find OpenCV and GStreamer packages
-set(OpenCV_DIR "C:/Users/danie/opencv/build/x64/vc16/lib")
+#set(OpenCV_DIR "C:/Users/danie/opencv/build/x64/vc16/lib")
+set(OpenCV_DIR "C:/Users/danie/Downloads/opencv/build/x64/vc16/lib")
 
 set(PKG_CONFIG_EXECUTABLE "C:/gstreamer/1.0/msvc_x86_64/bin/pkg-config.exe")
 set(GSTREAMER_DIR "C:/gstreamer/1.0/msvc_x86_64")
@@ -40,6 +26,7 @@ include_directories(${GSTREAMER_INCLUDE_DIRS})
 add_executable(VideoProcessor src/main.cpp)
 
 # Link OpenCV and GStreamer libraries
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
 target_link_libraries(VideoProcessor ${OpenCV_LIBS} ${GSTREAMER_LIBRARIES})
 
 set(GSTREAMER_LIBRARIES
