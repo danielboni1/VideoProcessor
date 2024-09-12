@@ -8,7 +8,6 @@ set(CMAKE_CXX_STANDARD 17)
 # Find OpenCV and GStreamer packages
 #set(OpenCV_DIR "C:/Users/danie/opencv/build/x64/vc16/lib")
 set(OpenCV_DIR "C:/Users/danie/Downloads/opencv/build/x64/vc16/lib")
-
 set(PKG_CONFIG_EXECUTABLE "C:/gstreamer/1.0/msvc_x86_64/bin/pkg-config.exe")
 set(GSTREAMER_DIR "C:/gstreamer/1.0/msvc_x86_64")
 link_directories(${GSTREAMER_DIR}/lib)
