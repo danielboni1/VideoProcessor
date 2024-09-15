@@ -100,23 +100,87 @@ void applyGrayscaleFilter(const std::string& inputFile, const std::string& outpu
     }
 }
 
-int main(int argc, char** argv) {
-    // Check if the input video file is provided as an argument
-    if (argc < 2) {
-        std::cerr << "Usage: " << argv[0] << " <input video>" << std::endl;
-        return -1;
+int main() {
+    std::string inputFile = "C:/Users/danie/Downloads/ואת אינך.mp4";  // שם הסרטון המקורי
+    std::string outputFile;
+    std::string text;
+    int choice;
+    
+
+    // הצגת אפשרויות לבחירה
+    std::cout << "Choose a function to apply to the video:\n";
+    std::cout << "1 - Convert Format\n";
+    std::cout << "2 - Trim Video\n";
+    std::cout << "3 - Resize Video\n";
+    std::cout << "4 - Rotate Video\n";
+    std::cout << "5 - Add Text Overlay\n";
+    std::cout << "6 - Apply Grayscale Filter\n";
+    std::cout << "Enter your choice: ";
+    std::cin >> choice;
+
+    switch (choice) {
+    case 1:
+        // 1. המרת פורמט הווידאו
+        outputFile = "format_conversion.avi";
+        convertFormat(inputFile, outputFile);
+        std::cout << "Format conversion done: " << outputFile << std::endl;
+        break;
+
+    case 2:
+        // 2. חיתוך הווידאו בין שנייה 5 ל-10
+        outputFile = "trimmed.avi";
+        int startSec, endSec;
+        std::cout << "Enter start second: ";
+        std::cin >> startSec;
+        std::cout << "Enter end second: ";
+        std::cin >> endSec;
+        trimVideo(inputFile, outputFile, startSec, endSec);
+        std::cout << "Video trimming done: " << outputFile << std::endl;
+        break;
+
+    case 3:
+        // 3. שינוי גודל הווידאו ל-640x480
+        outputFile = "resized.avi";
+        int newWidth, newHeight;
+        std::cout << "Enter new width: ";
+        std::cin >> newWidth;
+        std::cout << "Enter new height: ";
+        std::cin >> newHeight;
+        resizeVideo(inputFile, outputFile, newWidth, newHeight);
+        std::cout << "Video resizing done: " << outputFile << std::endl;
+        break;
+
+    case 4:
+        // 4. סיבוב הווידאו ב-90 מעלות
+        outputFile = "rotated.avi";
+        double angle;
+        std::cout << "Enter rotation angle (in degrees): ";
+        std::cin >> angle;
+        rotateVideo(inputFile, outputFile, angle);
+        std::cout << "Video rotation done: " << outputFile << std::endl;
+        break;
+
+    case 5:
+        // 5. הוספת טקסט על הווידאו
+        outputFile = "text_overlay.avi";
+        std::cout << "Enter text to overlay: ";
+        std::cin.ignore();  // לנקות את ה-buffer של הקלט
+        std::getline(std::cin, text);
+        addTextOverlay(inputFile, outputFile, text);
+        std::cout << "Text overlay added: " << outputFile << std::endl;
+        break;
+
+    case 6:
+        // 6. יישום מסנן גווני אפור
+        outputFile = "grayscale.avi";
+        applyGrayscaleFilter(inputFile, outputFile);
+        std::cout << "Grayscale filter applied: " << outputFile << std::endl;
+        break;
+
+    default:
+        std::cout << "Invalid choice!" << std::endl;
+        break;
     }
 
-    std::string inputFile = argv[1];  // Input video file from the command line argument
-    std::string outputFile = "output.avi";  // Default output video file
-
-    // Example processing functions
-    convertFormat(inputFile, outputFile);  // Convert video format
-    trimVideo(inputFile, "trimmed.avi", 5, 10);  // Trim from 5 to 10 seconds
-    resizeVideo(inputFile, "resized.avi", 640, 480);  // Resize video to 640x480
-    rotateVideo(inputFile, "rotated.avi", 90);  // Rotate video by 90 degrees
-    addTextOverlay(inputFile, "text_overlay.avi", "Sample Text");  // Add text overlay
-    applyGrayscaleFilter(inputFile, "grayscale.avi");  // Apply grayscale filter
-
-    return 0;  // Exit the program
+    return 0;
 }
